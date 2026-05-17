@@ -1,0 +1,10 @@
+4 layered architechture:-
+
+
+UI => UI dikhana aur navigation handle (pages,component)
+
+hook => State and APIs manage krna { hooks }
+
+State => data store [ auth.context.jsx , post.context.jsx]
+
+API => backend se comm krne ke liye [services/auth.api.js]
