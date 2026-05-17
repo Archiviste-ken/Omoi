@@ -103,7 +103,7 @@ const Player = () => {
     setCurrentTime(nextTime);
   };
 
-  const trackTitle = song?.title || "No track loaded yet";
+  const trackTitle = song?.title || "Waiting for your next mood";
   const posterUrl =
     song?.posterUrl ||
     "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=900&q=80";
@@ -125,9 +125,12 @@ const Player = () => {
             <div>
               <p className="player-kicker">Moodify Player</p>
               <h2>{trackTitle}</h2>
+              <span className="player-subtitle">
+                {loading ? "Curating a fresh track..." : "Polished playback controls for the selected vibe."}
+              </span>
             </div>
 
-            <span className="player-badge">{speed.toFixed(2)}x</span>
+            <span className="player-badge">{speed.toFixed(2)}x speed</span>
           </div>
 
           <div className="player-progress">

@@ -1,9 +1,9 @@
 import "../style/register.scss";
 import React, { useState } from "react";
 import FormGroup from "../components/FormGroup";
-import { Link } from "react-router";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
+import heroImage from "../../../assets/hero.png";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -12,21 +12,39 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-  const { handleRegister } = useAuth();
+  const { handleRegister, loading } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     await handleRegister({ username, email, password });
-
     navigate("/");
   }
 
   return (
     <main className="register-page">
+      <section className="auth-hero">
+        <span className="auth-hero__eyebrow">Create your account</span>
+        <h1>Build your own mood-driven music workspace.</h1>
+        <p>
+          Register once, then let Moodify handle the premium audio journey with
+          a polished interface and expression-based recommendations.
+        </p>
+        <ul className="auth-hero__list">
+          <li>Personalized vibe matching</li>
+          <li>Polished glass UI</li>
+          <li>Quick, confident onboarding</li>
+        </ul>
+        <div className="auth-hero__visual">
+          <img src={heroImage} alt="Moodify onboarding preview" />
+        </div>
+      </section>
+
       <div className="form-container">
-        <h1>Register</h1>
-        <form onSubmit={handleSubmit}>
+        <div className="form-card">
+          <span className="form-kicker">Premium onboarding</span>
+          <h2>Register</h2>
+          <form onSubmit={handleSubmit}>
           <FormGroup
             label="Username"
             placeholder="Enter your username"
@@ -46,13 +64,14 @@ const Register = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="button" type="submit">
-            Register
+          <button className="button" type="submit" disabled={loading}>
+            {loading ? "Creating..." : "Register"}
           </button>
           <p>
             Already have an account? <Link to="/login">Login here</Link>
           </p>
         </form>
+        </div>
       </div>
     </main>
   );

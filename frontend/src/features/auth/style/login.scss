@@ -1,46 +1,181 @@
 .login-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   min-height: 100vh;
-  background-color: black;
-  padding: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  gap: 1.25rem;
+  padding: clamp(1rem, 2vw, 2rem);
+  align-items: stretch;
+}
 
+.auth-hero,
+.form-container {
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(18px);
+  box-shadow: 0 22px 60px rgba(2, 4, 10, 0.35);
+}
 
-  .form-container {
-    background-color: transparent;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    min-width: 300px;
-    gap: 7rem;
+.auth-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2.4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
 
+.auth-hero::before {
+  content: "";
+  position: absolute;
+  inset: auto -8rem -8rem auto;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 156, 85, 0.18), transparent 65%);
+  pointer-events: none;
+}
+
+.auth-hero__eyebrow,
+.form-kicker {
+  width: fit-content;
+  padding: 0.45rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-hero h1 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.3rem, 5vw, 4.7rem);
+  line-height: 0.96;
+  letter-spacing: -0.06em;
+}
+
+.auth-hero p {
+  margin: 0;
+  max-width: 52ch;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.auth-hero__list {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  color: var(--text);
+}
+
+.auth-hero__list li {
+  position: relative;
+  padding-left: 1.3rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.auth-hero__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd08a 0%, #ff9556 50%, #8e7cff 100%);
+}
+
+.auth-hero__visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.auth-hero__visual img {
+  width: 100%;
+  min-height: 14rem;
+  object-fit: cover;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.15rem, 3vw, 2.25rem);
+}
+
+.form-card {
+  width: min(100%, 28rem);
+}
+
+.form-card h2 {
+  margin: 0.75rem 0 1.5rem;
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  letter-spacing: -0.04em;
+}
+
+.login-page form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-page .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.login-page label {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.login-page input {
+  padding: 0.95rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(6, 8, 15, 0.55);
+  color: var(--text);
+  outline: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.login-page input::placeholder {
+  color: rgba(246, 247, 251, 0.4);
+}
+
+.login-page input:focus {
+  border-color: rgba(255, 177, 77, 0.45);
+  box-shadow: 0 0 0 4px rgba(255, 177, 77, 0.12);
+}
+
+.login-page form p {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+}
+
+.login-page form a {
+  color: #ffd08a;
+}
+
+@media (max-width: 980px) {
+  .login-page {
+    grid-template-columns: 1fr;
   }
 
-  form{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-
-      label {
-        font-size: 1rem;
-        color: whitesmoke;
-      }
-
-      input {
-        padding: 0.5rem;
-        border-radius: 0.25rem;
-        border: 1px solid #ccc;
-
-        border: none;
-        outline: none;
-      }
-    }
+  .auth-hero h1 {
+    max-width: none;
   }
 }
